@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "bibverify": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["bibverify", "mcp"],
+      "description": "BibTeX 参考文献真实性核验（Hylouis233/bibverify），提供 verify_bib_file / doi_to_bibtex / rank_lookup_sources / explain_update_diff"
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "openscience",
+  "owner": {
+    "name": "Hylouis233"
+  },
+  "metadata": {
+    "version": "0.2.0",
+    "description": "开放科研工作台：文献→假设→实验→分析→写作，证据可核验、过程可审计"
+  },
+  "plugins": [
+    {
+      "name": "science-core",
+      "displayName": "Science Core",
+      "source": "./plugins/science-core",
+      "description": "科研工作台骨架：研究画像、生命周期路由、阶段门禁、provenance、证据胶囊、reviewer",
+      "author": {
+        "name": "Hylouis233"
+      }
+    },
+    {
+      "name": "science-literature",
+      "displayName": "Science Literature",
+      "source": "./plugins/science-literature",
+      "description": "文献检索→综述→写作链路：多源统一检索、证据映射综述、GB/T 7714 写作、中文文献（CNKI 题录解析 + 万方 API）",
+      "author": {
+        "name": "Hylouis233"
+      }
+    },
+    {
+      "name": "science-verify",
+      "displayName": "Science Verify",
+      "source": "./plugins/science-verify",
+      "description": "证据核验引擎：BibTeX 参考文献核验(bibverify)、claim 支撑检查、补证闭环",
+      "author": {
+        "name": "Hylouis233"
+      }
+    },
+    {
+      "name": "science-compute",
+      "displayName": "Science Compute",
+      "source": "./plugins/science-compute",
+      "description": "科研计算：Python/R 分析规程、SSH 远程算力(probe-then-contract)、Slurm 集群、长任务 Run 管理",
+      "author": {
+        "name": "Hylouis233"
+      }
+    },
+    {
+      "name": "science-data",
+      "displayName": "Science Data",
+      "source": "./plugins/science-data",
+      "description": "科研数据库 connector：按域聚合的 MCP 指针与检索规程，fail-closed 合规清单",
+      "author": {
+        "name": "Hylouis233"
+      }
+    },
+    {
+      "name": "science-epi",
+      "displayName": "Science Epidemiology",
+      "source": "./plugins/science-epi",
+      "description": "流行病学与公共卫生域包：数据源、暴发调查、SEIR 仓室模型、空间分析、公卫写作",
+      "author": {
+        "name": "Hylouis233"
+      }
+    }
+  ]
+}

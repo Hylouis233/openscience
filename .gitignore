@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.pyc
+
+# Research runtime artifacts (per-workspace, not part of the plugin).
+# Root-anchored so the demo workspace under examples/ stays committed.
+/output/
+/.openscience/
+/runs/
+
+# OS
+.DS_Store
+Thumbs.db

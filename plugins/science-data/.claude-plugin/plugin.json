@@ -1,0 +1,8 @@
+{
+  "name": "science-data",
+  "version": "0.1.0",
+  "description": "科研数据库 connector：按域聚合的 MCP 指针与检索规程，fail-closed 合规清单",
+  "author": {
+    "name": "Hylouis233"
+  }
+}

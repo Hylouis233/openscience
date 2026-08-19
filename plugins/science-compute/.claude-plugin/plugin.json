@@ -1,0 +1,8 @@
+{
+  "name": "science-compute",
+  "version": "0.1.0",
+  "description": "科研计算：本地分析内核约定、SSH 远程算力、Slurm 集群、长任务 Run 管理",
+  "author": {
+    "name": "Hylouis233"
+  }
+}

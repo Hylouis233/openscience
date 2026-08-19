@@ -1,0 +1,8 @@
+{
+  "name": "science-core",
+  "version": "0.2.0",
+  "description": "科研工作台骨架：研究画像、生命周期路由、阶段门禁、provenance、证据胶囊、reviewer",
+  "author": {
+    "name": "Hylouis233"
+  }
+}

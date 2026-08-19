@@ -1,0 +1,68 @@
+# evals-llm：skill 触发评测定时工作流
+#
+# 每周一 03:17 UTC 定时运行（避开整点），也可手动 workflow_dispatch 触发。
+# 离线结构校验（evals/run_trigger_evals.py 默认模式）始终运行、无需任何密钥；
+# LLM 路由评测（--llm）仅在配置了下列仓库 secrets 时运行：
+#
+#   EVAL_LLM_BASE_URL   OpenAI 兼容端点，如 https://api.openai.com/v1
+#   EVAL_LLM_API_KEY    该端点的 API key
+#   EVAL_LLM_MODEL      模型名，如 gpt-4o-mini
+#
+# 配置方法：仓库页面 Settings → Secrets and variables → Actions →
+# "New repository secret"，逐一添加上述三项。未配置时本工作流只跑离线校验，
+# LLM 步骤打印跳过说明，不算失败。
+name: evals-llm
+
+on:
+  schedule:
+    - cron: "17 3 * * 1" # 每周一 03:17 UTC
+  workflow_dispatch:
+
+jobs:
+  trigger-evals:
+    runs-on: ubuntu-latest
+    env:
+      EVAL_LLM_BASE_URL: ${{ secrets.EVAL_LLM_BASE_URL }}
+      EVAL_LLM_API_KEY: ${{ secrets.EVAL_LLM_API_KEY }}
+      EVAL_LLM_MODEL: ${{ secrets.EVAL_LLM_MODEL }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Offline structural validation (always)
+        run: python evals/run_trigger_evals.py
+
+      - name: LLM routing eval (secrets configured)
+        if: ${{ env.EVAL_LLM_BASE_URL != '' }}
+        run: |
+          set +e
+          python evals/run_trigger_evals.py --llm --format json | tee llm-report.json
+          code=${PIPESTATUS[0]}
+          set -e
+          python - <<'EOF' >> "$GITHUB_STEP_SUMMARY"
+          import json
+
+          with open("llm-report.json", encoding="utf-8") as fh:
+              report = json.load(fh)
+          s = report["summary"]
+          fmt = lambda v: "n/a" if v is None else f"{v:.3f}"
+          print("## LLM 触发评测结果")
+          print()
+          print(f"- model: `{report['model']}`，阈值: {report['threshold']}")
+          print(f"- 用例: total={s['total']}（positive={s['positive']}，"
+                f"negative={s['negative']}，errors={s['errors']}）")
+          print(f"- **正例命中率 hit_rate = {fmt(s['hit_rate'])}**")
+          print(f"- 负例误触发率 false_trigger_rate = {fmt(s['false_trigger_rate'])}")
+          print(f"- 结论: {'PASS' if report['passed'] else 'FAIL'}")
+          EOF
+          exit $code
+
+      - name: LLM routing eval skipped (no secrets)
+        if: ${{ env.EVAL_LLM_BASE_URL == '' }}
+        run: |
+          echo "未配置 EVAL_LLM_BASE_URL / EVAL_LLM_API_KEY / EVAL_LLM_MODEL secrets，"
+          echo "跳过 LLM 路由评测（离线结构校验已在上方完成）。"
+          echo "配置方法见 .github/workflows/evals-llm.yml 文件头注释。"

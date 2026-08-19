@@ -1,0 +1,2 @@
+{"ts": "2026-08-19T10:15:00+08:00", "paths": ["output/literature-search/a1b2c3d4/latest/papers.json"], "tool": "skill:literature-search", "session": "cli-2026-08-19-01", "model": "kimi-k2", "env_hash": "02008886520f", "note": "示例数据：演示多源检索产物登记（3 条虚构 PaperDocument）"}
+{"ts": "2026-08-19T10:32:00+08:00", "paths": ["output/literature-survey/a1b2c3d4/latest/survey.md"], "tool": "skill:literature-survey", "session": "cli-2026-08-19-01", "model": "kimi-k2", "env_hash": "02008886520f", "note": "示例数据：演示 8 字段综述底稿登记，基于上一条检索产物"}

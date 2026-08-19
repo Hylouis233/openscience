@@ -1,0 +1,96 @@
+{
+  "input": "data/linelist.csv",
+  "interval": "day",
+  "total": 30,
+  "peak_date": "2026-07-11",
+  "peak_count": 5,
+  "span": {
+    "start": "2026-07-06",
+    "end": "2026-07-19",
+    "days": 14
+  },
+  "by_type": {
+    "临床": 10,
+    "疑似": 7,
+    "确诊": 13
+  },
+  "skipped_rows": 0,
+  "curve": [
+    {
+      "bucket": "2026-07-06",
+      "count": 1
+    },
+    {
+      "bucket": "2026-07-07",
+      "count": 1
+    },
+    {
+      "bucket": "2026-07-08",
+      "count": 2
+    },
+    {
+      "bucket": "2026-07-09",
+      "count": 3
+    },
+    {
+      "bucket": "2026-07-10",
+      "count": 4
+    },
+    {
+      "bucket": "2026-07-11",
+      "count": 5
+    },
+    {
+      "bucket": "2026-07-12",
+      "count": 4
+    },
+    {
+      "bucket": "2026-07-13",
+      "count": 3
+    },
+    {
+      "bucket": "2026-07-14",
+      "count": 2
+    },
+    {
+      "bucket": "2026-07-15",
+      "count": 2
+    },
+    {
+      "bucket": "2026-07-16",
+      "count": 1
+    },
+    {
+      "bucket": "2026-07-17",
+      "count": 1
+    },
+    {
+      "bucket": "2026-07-18",
+      "count": 0
+    },
+    {
+      "bucket": "2026-07-19",
+      "count": 1
+    }
+  ],
+  "attack_rates": [
+    {
+      "group": "丙村",
+      "cases": 5,
+      "population": 810,
+      "attack_rate_pct": 0.62
+    },
+    {
+      "group": "乙村",
+      "cases": 10,
+      "population": 560,
+      "attack_rate_pct": 1.79
+    },
+    {
+      "group": "甲村",
+      "cases": 15,
+      "population": 430,
+      "attack_rate_pct": 3.49
+    }
+  ]
+}

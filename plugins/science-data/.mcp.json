@@ -1,0 +1,22 @@
+{
+  "mcpServers": {
+    "paper-search": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["paper-search-mcp"],
+      "description": "学术论文聚合检索（arXiv/PubMed/Crossref/Semantic Scholar/bioRxiv）"
+    },
+    "biomcp": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["biomcp", "run"],
+      "description": "生物医学实体与文献（需部分端点无 key）"
+    },
+    "open-meteo": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["open-meteo-mcp"],
+      "description": "气象数据（免费无需 key）"
+    }
+  }
+}

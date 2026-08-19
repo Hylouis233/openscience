@@ -1,0 +1,41 @@
+{
+  "_notice": "示例数据：以下 3 条记录为虚构的教学演示，不对应真实文献，仅演示 PaperDocument 字段格式。真实运行产物为顶层 PaperDocument 数组（即本文件 papers 字段的内容直接作为 JSON 数组，无本包装层）；字段契约见 plugins/science-literature/skills/literature-search/SKILL.md。",
+  "papers": [
+    {
+      "id": "https://openalex.org/W9900000001",
+      "title": "（示例数据）硅基负极体积膨胀的纳米结构设计：从空心到蛋黄-壳",
+      "authors": ["李示例", "王演示", "Zhang, S."],
+      "year": 2024,
+      "venue": "示例能源材料学报",
+      "doi": "10.0000/example.2024.0001",
+      "url": "https://example.org/articles/example-2024-0001",
+      "abstract": "（示例数据）本文综述纳米结构设计缓解硅基负极嵌锂体积膨胀的策略，比较空心球、蛋黄-壳与多孔骨架三类结构的循环稳定性与首效损失，指出界面副反应控制是放大制备的主要瓶颈……",
+      "source": ["openalex", "crossref"],
+      "retrieved_at": "2026-08-19T02:15:00+00:00"
+    },
+    {
+      "id": "https://openalex.org/W9900000002",
+      "title": "（示例数据）Prelithiation strategies for silicon-dominant anodes: a comparative study",
+      "authors": ["Garcia, M.", "陈示例"],
+      "year": 2025,
+      "venue": "Journal of Example Energy Storage",
+      "doi": "10.0000/example.2025.0042",
+      "url": "https://example.org/articles/example-2025-0042",
+      "abstract": "(示例数据) We compare chemical, electrochemical and direct-contact prelithiation routes for silicon-dominant anodes, reporting first-cycle efficiency gains of 8-15% and discussing scalability constraints of each route ...",
+      "source": ["openalex", "arxiv"],
+      "retrieved_at": "2026-08-19T02:15:00+00:00"
+    },
+    {
+      "id": "https://openalex.org/W9900000003",
+      "title": "（示例数据）原位表征揭示硅-电解质界面膜的演化动力学",
+      "authors": ["刘示例", "Tanaka, R.", "Smith, J."],
+      "year": 2026,
+      "venue": "示例电化学通讯",
+      "doi": "10.0000/example.2026.0107",
+      "url": "https://example.org/articles/example-2026-0107",
+      "abstract": "（示例数据）利用原位原子力显微镜与冷冻电镜联用，跟踪硅-电解质界面膜在前五十周的成核-增厚-破裂循环，量化了电解液添加剂对界面膜自修复速率的影响……",
+      "source": ["crossref"],
+      "retrieved_at": "2026-08-19T02:15:00+00:00"
+    }
+  ]
+}

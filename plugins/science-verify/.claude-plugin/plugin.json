@@ -1,0 +1,8 @@
+{
+  "name": "science-verify",
+  "version": "0.2.0",
+  "description": "证据核验引擎：BibTeX 参考文献核验(bibverify)、claim 支撑检查、补证闭环",
+  "author": {
+    "name": "Hylouis233"
+  }
+}

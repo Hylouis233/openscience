@@ -1,0 +1,8 @@
+{
+  "name": "science-literature",
+  "version": "0.2.0",
+  "description": "文献检索→综述→写作链路：多源统一检索、证据映射综述、GB/T 7714 写作",
+  "author": {
+    "name": "Hylouis233"
+  }
+}

@@ -1,0 +1,545 @@
+{
+  "version": 1,
+  "cases": [
+    {
+      "id": "os-001",
+      "utterance": "我第一次用这个科研工作台，是不是得先做个访谈，把我的研究背景填一下？",
+      "expected_plugin": "science-core",
+      "expected_skill": "cold-start-interview",
+      "should_trigger": true
+    },
+    {
+      "id": "os-002",
+      "utterance": "帮我重新初始化一下研究画像，之前填的那些都过时了，重新 interview 一遍。",
+      "expected_plugin": "science-core",
+      "expected_skill": "cold-start-interview",
+      "should_trigger": true
+    },
+    {
+      "id": "os-003",
+      "utterance": "我想研究益生菌对溃疡性结肠炎的疗效，从头开始带我走一遍完整的研究流程。",
+      "expected_plugin": "science-core",
+      "expected_skill": "research-lifecycle",
+      "should_trigger": true
+    },
+    {
+      "id": "os-004",
+      "utterance": "上次那个课题做到一半了，接着上次的研究流程往下推进吧。",
+      "expected_plugin": "science-core",
+      "expected_skill": "research-lifecycle",
+      "should_trigger": true
+    },
+    {
+      "id": "os-005",
+      "utterance": "准备开题了，帮我把这个选题从问题界定到成稿整个生命周期都管起来。",
+      "expected_plugin": "science-core",
+      "expected_skill": "research-lifecycle",
+      "should_trigger": true
+    },
+    {
+      "id": "os-006",
+      "utterance": "帮我建一个新的研究项目目录，data、figures 那些文件夹都按规范来。",
+      "expected_plugin": "science-core",
+      "expected_skill": "research-workspace",
+      "should_trigger": true
+    },
+    {
+      "id": "os-007",
+      "utterance": "检查一下我这个项目文件夹的结构合不合规，产物到底该放哪儿？",
+      "expected_plugin": "science-core",
+      "expected_skill": "research-workspace",
+      "should_trigger": true
+    },
+    {
+      "id": "os-008",
+      "utterance": "这个阶段产出的东西我看完了，approve，进下一阶段。",
+      "expected_plugin": "science-core",
+      "expected_skill": "stage-gate",
+      "should_trigger": true
+    },
+    {
+      "id": "os-009",
+      "utterance": "看一下当前阶段状态，我觉得结果有问题，要 revise 重跑这一步。",
+      "expected_plugin": "science-core",
+      "expected_skill": "stage-gate",
+      "should_trigger": true
+    },
+    {
+      "id": "os-010",
+      "utterance": "登记一下刚才那次计算的产物和运行环境，记到 provenance 里。",
+      "expected_plugin": "science-core",
+      "expected_skill": "provenance-record",
+      "should_trigger": true
+    },
+    {
+      "id": "os-011",
+      "utterance": "这张图是哪次运行生成的？当时用的什么环境？帮我查一下来源。",
+      "expected_plugin": "science-core",
+      "expected_skill": "provenance-record",
+      "should_trigger": true
+    },
+    {
+      "id": "os-012",
+      "utterance": "审稿人要看原始数据，帮我把支撑这个结论的数据、代码、图表冻结成一个证据胶囊。",
+      "expected_plugin": "science-core",
+      "expected_skill": "evidence-capsule",
+      "should_trigger": true
+    },
+    {
+      "id": "os-013",
+      "utterance": "投稿前把复现材料打个包，做个可复现性归档。",
+      "expected_plugin": "science-core",
+      "expected_skill": "evidence-capsule",
+      "should_trigger": true
+    },
+    {
+      "id": "os-014",
+      "utterance": "我换目标期刊了，顺便把引用格式改成 APA，帮我更新一下设置。",
+      "expected_plugin": "science-core",
+      "expected_skill": "customize",
+      "should_trigger": true
+    },
+    {
+      "id": "os-015",
+      "utterance": "帮我调整一下 guardrails，把数据合规那条收紧一点。",
+      "expected_plugin": "science-core",
+      "expected_skill": "customize",
+      "should_trigger": true
+    },
+    {
+      "id": "os-016",
+      "utterance": "帮我找找 CRISPR 脱靶效应检测方法这几年的论文。",
+      "expected_plugin": "science-literature",
+      "expected_skill": "literature-search",
+      "should_trigger": true
+    },
+    {
+      "id": "os-017",
+      "utterance": "查一下这篇文章的 DOI 和出处，我手里只有一个标题。",
+      "expected_plugin": "science-literature",
+      "expected_skill": "literature-search",
+      "should_trigger": true
+    },
+    {
+      "id": "os-018",
+      "utterance": "帮我追踪一下单细胞测序方向最近有没有新的预印本。",
+      "expected_plugin": "science-literature",
+      "expected_skill": "literature-search",
+      "should_trigger": true
+    },
+    {
+      "id": "os-019",
+      "utterance": "这几篇文献我已经下好了，帮我分析一下它们的共识和分歧点。",
+      "expected_plugin": "science-literature",
+      "expected_skill": "literature-survey",
+      "should_trigger": true
+    },
+    {
+      "id": "os-020",
+      "utterance": "帮我梳理一下这个领域的研究现状，还有哪些空白没人做？",
+      "expected_plugin": "science-literature",
+      "expected_skill": "literature-survey",
+      "should_trigger": true
+    },
+    {
+      "id": "os-021",
+      "utterance": "基于这批文献，帮我写一篇关于肿瘤免疫微环境的综述初稿。",
+      "expected_plugin": "science-literature",
+      "expected_skill": "review-writing",
+      "should_trigger": true
+    },
+    {
+      "id": "os-022",
+      "utterance": "把我们调研的结果写成相关工作那一节，参考文献按 GB/T 7714 排版。",
+      "expected_plugin": "science-literature",
+      "expected_skill": "review-writing",
+      "should_trigger": true
+    },
+    {
+      "id": "os-023",
+      "utterance": "去知网帮我搜一下国内关于中医药治疗糖尿病的期刊论文。",
+      "expected_plugin": "science-literature",
+      "expected_skill": "cn-literature",
+      "should_trigger": true
+    },
+    {
+      "id": "os-024",
+      "utterance": "帮我查查万方上有没有这个课题的中文硕士论文。",
+      "expected_plugin": "science-literature",
+      "expected_skill": "cn-literature",
+      "should_trigger": true
+    },
+    {
+      "id": "os-025",
+      "utterance": "投稿前帮我体检一下参考文献，看看有没有编造的引用。",
+      "expected_plugin": "science-verify",
+      "expected_skill": "citation-verify",
+      "should_trigger": true
+    },
+    {
+      "id": "os-026",
+      "utterance": "这个 DOI 跟题录对得上吗？我怀疑张冠李戴了。",
+      "expected_plugin": "science-verify",
+      "expected_skill": "citation-verify",
+      "should_trigger": true
+    },
+    {
+      "id": "os-027",
+      "utterance": "帮我检查一下我的 bib 文件，有几条条目好像有问题。",
+      "expected_plugin": "science-verify",
+      "expected_skill": "citation-verify",
+      "should_trigger": true
+    },
+    {
+      "id": "os-028",
+      "utterance": "帮我把这篇稿子的引用问题全查一遍，缺支撑的论断补文献，修到没有硬伤为止。",
+      "expected_plugin": "science-verify",
+      "expected_skill": "evidence-loop",
+      "should_trigger": true
+    },
+    {
+      "id": "os-029",
+      "utterance": "帮我做个证据闭环：先核引用，再查正文支撑，问题条目定向补检，迭代到收敛。",
+      "expected_plugin": "science-verify",
+      "expected_skill": "evidence-loop",
+      "should_trigger": true
+    },
+    {
+      "id": "os-030",
+      "utterance": "用 Python 帮我跑一下这批实验数据的统计分析，再画几张结果图。",
+      "expected_plugin": "science-compute",
+      "expected_skill": "python-analysis",
+      "should_trigger": true
+    },
+    {
+      "id": "os-031",
+      "utterance": "写个脚本帮我清洗这份 CSV，然后做个机器学习分类实验。",
+      "expected_plugin": "science-compute",
+      "expected_skill": "python-analysis",
+      "should_trigger": true
+    },
+    {
+      "id": "os-032",
+      "utterance": "我用 R 顺手，帮我用 R 做个生存分析和 Cox 回归。",
+      "expected_plugin": "science-compute",
+      "expected_skill": "r-analysis",
+      "should_trigger": true
+    },
+    {
+      "id": "os-033",
+      "utterance": "这段 R 代码帮我改成 tidyverse 风格，顺便跑个差异表达分析。",
+      "expected_plugin": "science-compute",
+      "expected_skill": "r-analysis",
+      "should_trigger": true
+    },
+    {
+      "id": "os-034",
+      "utterance": "本地跑不动，帮我 SSH 到实验室那台服务器上跑这个训练任务。",
+      "expected_plugin": "science-compute",
+      "expected_skill": "remote-compute",
+      "should_trigger": true
+    },
+    {
+      "id": "os-035",
+      "utterance": "把这个分析任务丢到远程工作站上跑，跑完把结果拉回本地。",
+      "expected_plugin": "science-compute",
+      "expected_skill": "remote-compute",
+      "should_trigger": true
+    },
+    {
+      "id": "os-036",
+      "utterance": "帮我写个 sbatch 脚本，把作业提交到 Slurm 队列，要 4 张卡。",
+      "expected_plugin": "science-compute",
+      "expected_skill": "hpc-slurm",
+      "should_trigger": true
+    },
+    {
+      "id": "os-037",
+      "utterance": "我们集群是 Slurm 调度的，这个大批量任务帮我拆成数组作业提交上去。",
+      "expected_plugin": "science-compute",
+      "expected_skill": "hpc-slurm",
+      "should_trigger": true
+    },
+    {
+      "id": "os-038",
+      "utterance": "帮我盯着那个跑了三天的任务，挂了或者跑完就告诉我一声。",
+      "expected_plugin": "science-compute",
+      "expected_skill": "run-monitor",
+      "should_trigger": true
+    },
+    {
+      "id": "os-039",
+      "utterance": "看看远程那几个作业的状态，有没有报错的？把日志尾部打出来给我。",
+      "expected_plugin": "science-compute",
+      "expected_skill": "run-monitor",
+      "should_trigger": true
+    },
+    {
+      "id": "os-040",
+      "utterance": "帮我查一下某种钙钛矿材料的带隙，应该走哪个数据库？Materials Project 吗？",
+      "expected_plugin": "science-data",
+      "expected_skill": "scientific-databases",
+      "should_trigger": true
+    },
+    {
+      "id": "os-041",
+      "utterance": "我需要美国 GDP 的季度时间序列，FRED 上能直接拉吗？",
+      "expected_plugin": "science-data",
+      "expected_skill": "scientific-databases",
+      "should_trigger": true
+    },
+    {
+      "id": "os-042",
+      "utterance": "帮我下载 WHO 公布的各国疟疾发病率数据，后面做分析用。",
+      "expected_plugin": "science-epi",
+      "expected_skill": "epi-data-access",
+      "should_trigger": true
+    },
+    {
+      "id": "os-043",
+      "utterance": "想拿中国分省的流感周报数据，从哪个公卫数据源接？",
+      "expected_plugin": "science-epi",
+      "expected_skill": "epi-data-access",
+      "should_trigger": true
+    },
+    {
+      "id": "os-044",
+      "utterance": "某学校报告了三十多例腹泻病例，帮我做个暴发调查分析，画一下流行曲线。",
+      "expected_plugin": "science-epi",
+      "expected_skill": "outbreak-analysis",
+      "should_trigger": true
+    },
+    {
+      "id": "os-045",
+      "utterance": "这起疑似食物中毒事件，帮我算一下罹患率，找找可能的暴露因素。",
+      "expected_plugin": "science-epi",
+      "expected_skill": "outbreak-analysis",
+      "should_trigger": true
+    },
+    {
+      "id": "os-046",
+      "utterance": "帮我建个 SEIR 模型拟合这波流感的传播曲线，估一下 R0。",
+      "expected_plugin": "science-epi",
+      "expected_skill": "seir-modeling",
+      "should_trigger": true
+    },
+    {
+      "id": "os-047",
+      "utterance": "用仓室模型模拟一下不同干预力度下，疫情峰值大概什么时候到。",
+      "expected_plugin": "science-epi",
+      "expected_skill": "seir-modeling",
+      "should_trigger": true
+    },
+    {
+      "id": "os-048",
+      "utterance": "把各区县的病例数画到地图上，看看有没有空间聚集。",
+      "expected_plugin": "science-epi",
+      "expected_skill": "spatial-epi",
+      "should_trigger": true
+    },
+    {
+      "id": "os-049",
+      "utterance": "帮我做个空间自相关分析，算个 Moran's I，看疾病分布有没有热点。",
+      "expected_plugin": "science-epi",
+      "expected_skill": "spatial-epi",
+      "should_trigger": true
+    },
+    {
+      "id": "os-050",
+      "utterance": "帮我把这次暴发调查整理成一份规范的现场流行病学调查报告。",
+      "expected_plugin": "science-epi",
+      "expected_skill": "epi-writing",
+      "should_trigger": true
+    },
+    {
+      "id": "os-051",
+      "utterance": "帮我起草一份疫情周报，按公卫报告的格式来写。",
+      "expected_plugin": "science-epi",
+      "expected_skill": "epi-writing",
+      "should_trigger": true
+    },
+    {
+      "id": "os-052",
+      "utterance": "帮我跑个检索，在 OpenAlex 上查关于铁死亡的论文。",
+      "expected_plugin": "science-literature",
+      "expected_skill": "literature-search",
+      "should_trigger": false,
+      "note": "paper-search 是库技能（只负责执行 API 检索），应由 literature-search 调用，不应被用户直接触发。"
+    },
+    {
+      "id": "os-053",
+      "utterance": "帮我看看草稿里哪些论断没有引用撑着，顺便把缺的文献补上。",
+      "expected_plugin": "science-verify",
+      "expected_skill": "evidence-loop",
+      "should_trigger": false,
+      "note": "claim-check 是库技能（只查论断支撑），补检迭代属 evidence-loop 职责，应由 evidence-loop 调用 claim-check，而非直接触发 claim-check。"
+    },
+    {
+      "id": "os-054",
+      "utterance": "帮我把这批参考文献按统一格式审查一遍，输出结构化的审查意见。",
+      "expected_plugin": "science-verify",
+      "expected_skill": "citation-verify",
+      "should_trigger": false,
+      "note": "reviewer-protocol 只是审查输出的格式契约（库技能），真正执行核验的是 citation-verify，reviewer-protocol 不应直接触发。"
+    },
+    {
+      "id": "os-055",
+      "utterance": "我换研究方向了，帮我把画像里的研究领域和目标期刊都更新掉。",
+      "expected_plugin": "science-core",
+      "expected_skill": "customize",
+      "should_trigger": false,
+      "note": "修改既有画像走 customize；cold-start-interview（首次访谈/重谈）不应触发。"
+    },
+    {
+      "id": "os-056",
+      "utterance": "这个阶段我不想继续了，reject 掉，把整个项目终止。",
+      "expected_plugin": "science-core",
+      "expected_skill": "stage-gate",
+      "should_trigger": false,
+      "note": "终止流程是 stage-gate 的 reject 分支；research-lifecycle（流程推进）不应触发。"
+    },
+    {
+      "id": "os-057",
+      "utterance": "原始数据我能直接在原文件上改吗？",
+      "expected_plugin": "science-core",
+      "expected_skill": "research-workspace",
+      "should_trigger": false,
+      "note": "原始数据只读是工作区规范问题；python-analysis（实际数据处理）不应触发。"
+    },
+    {
+      "id": "os-058",
+      "utterance": "在知网帮我找几篇这个主题的中文核心期刊论文。",
+      "expected_plugin": "science-literature",
+      "expected_skill": "cn-literature",
+      "should_trigger": false,
+      "note": "中文库检索走 cn-literature；literature-search（英文源统一检索）不应触发。"
+    },
+    {
+      "id": "os-059",
+      "utterance": "文献都找齐了，直接帮我写成综述初稿吧。",
+      "expected_plugin": "science-literature",
+      "expected_skill": "review-writing",
+      "should_trigger": false,
+      "note": "素材已备、任务是成文；literature-survey（整体分析）不应触发。"
+    },
+    {
+      "id": "os-060",
+      "utterance": "这几篇论文帮我精读一下，把里面的证据点都提出来。",
+      "expected_plugin": "science-literature",
+      "expected_skill": "literature-survey",
+      "should_trigger": false,
+      "note": "精读与证据提取属 literature-survey；review-writing（成文写作）不应触发。"
+    },
+    {
+      "id": "os-061",
+      "utterance": "这个 DOI 帮我查一下，跟题录对不上就帮我改过来。",
+      "expected_plugin": "science-verify",
+      "expected_skill": "citation-verify",
+      "should_trigger": false,
+      "note": "单条引用核验用 citation-verify；evidence-loop（全流程迭代修复）不应触发。"
+    },
+    {
+      "id": "os-062",
+      "utterance": "正文好几处论断的引用都撑不住，帮我把全文的证据链系统性地修一遍。",
+      "expected_plugin": "science-verify",
+      "expected_skill": "evidence-loop",
+      "should_trigger": false,
+      "note": "需要核引用+查支撑+定向补检的迭代闭环；只触发 citation-verify 不完整。"
+    },
+    {
+      "id": "os-063",
+      "utterance": "用 R 的 survival 包帮我拟合一下生存曲线。",
+      "expected_plugin": "science-compute",
+      "expected_skill": "r-analysis",
+      "should_trigger": false,
+      "note": "用户指明用 R；python-analysis 不应触发。"
+    },
+    {
+      "id": "os-064",
+      "utterance": "把这个作业提交到集群的 Slurm 队列里排队跑。",
+      "expected_plugin": "science-compute",
+      "expected_skill": "hpc-slurm",
+      "should_trigger": false,
+      "note": "走调度器提交作业；remote-compute（直接 SSH 交互执行）不应触发。"
+    },
+    {
+      "id": "os-065",
+      "utterance": "帮我看看服务器上那个任务还在不在跑，有没有报错。",
+      "expected_plugin": "science-compute",
+      "expected_skill": "run-monitor",
+      "should_trigger": false,
+      "note": "查看运行状态属监控；remote-compute（发起远程任务）不应触发。"
+    },
+    {
+      "id": "os-066",
+      "utterance": "帮我在 PubMed 上查查这个药有没有相关的临床试验报道文献。",
+      "expected_plugin": "science-literature",
+      "expected_skill": "literature-search",
+      "should_trigger": false,
+      "note": "PubMed 题录检索属文献检索；scientific-databases（结构化数据库 connector）不应触发。"
+    },
+    {
+      "id": "os-067",
+      "utterance": "这个宏观经济指标的月度时间序列去哪儿拿？帮我直接拉下来。",
+      "expected_plugin": "science-data",
+      "expected_skill": "scientific-databases",
+      "should_trigger": false,
+      "note": "结构化时序数据走数据库 connector；literature-search（文献检索）不应触发。"
+    },
+    {
+      "id": "os-068",
+      "utterance": "帮我搭个 SEIR 模型，看看不干预的话感染人数会怎么涨。",
+      "expected_plugin": "science-epi",
+      "expected_skill": "seir-modeling",
+      "should_trigger": false,
+      "note": "专用仓室建模；python-analysis（通用数据分析）不应触发。"
+    },
+    {
+      "id": "os-069",
+      "utterance": "把各区县的病例数画到地图上，看看聚集情况。",
+      "expected_plugin": "science-epi",
+      "expected_skill": "spatial-epi",
+      "should_trigger": false,
+      "note": "空间流行病学制图分析；python-analysis（通用画图）不应触发。"
+    },
+    {
+      "id": "os-070",
+      "utterance": "帮我把这次暴发调查写成规范的现场流调报告。",
+      "expected_plugin": "science-epi",
+      "expected_skill": "epi-writing",
+      "should_trigger": false,
+      "note": "公卫文书写作；review-writing（文献综述）不应触发。"
+    },
+    {
+      "id": "os-071",
+      "utterance": "帮我把这段英文摘要的语法润色一下。",
+      "expected_plugin": null,
+      "expected_skill": null,
+      "should_trigger": false,
+      "note": "纯语言润色不属于任何 skill 的职责，本仓库所有 skill 均不应触发。"
+    },
+    {
+      "id": "os-072",
+      "utterance": "下载好的 PDF 都在这了，帮我逐篇通读全文，把关键证据连同页码摘出来。",
+      "expected_plugin": "science-literature",
+      "expected_skill": "literature-survey",
+      "should_trigger": false,
+      "note": "paper-read 是库技能（单篇全文精读与证据提取规程），应由 literature-survey 在链路中调用加载，不应被用户直接触发。"
+    },
+    {
+      "id": "os-073",
+      "utterance": "先帮我把铁死亡这个方向的论文找齐，再逐篇精读做证据提取。",
+      "expected_plugin": "science-literature",
+      "expected_skill": "literature-search",
+      "should_trigger": false,
+      "note": "任务起点是检索，应路由到 literature-search（后续链路再加载 paper-read / literature-survey）；paper-read 是库技能，不应直接触发。"
+    },
+    {
+      "id": "os-074",
+      "utterance": "这几篇开放获取的论文能拿到全文，帮我通读全文后提取证据，不要只看摘要。",
+      "expected_plugin": "science-literature",
+      "expected_skill": "literature-survey",
+      "should_trigger": true
+    }
+  ]
+}
