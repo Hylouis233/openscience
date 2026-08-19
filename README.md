@@ -2,8 +2,6 @@
 
 # openscience
 
-**An evidence-first research workflow for Claude Code.**
-
 Search literature, build traceable evidence, analyze data, write drafts, verify citations — and keep a human in control of every major research step.
 
 [Quick start](#quick-start) · [See it work](#see-it-work) · [Research packs](#research-packs) · [Architecture](docs/architecture.md) · [Examples](examples/)
