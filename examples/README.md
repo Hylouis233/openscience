@@ -35,7 +35,7 @@ demo-workspace/
 ## 如何照这个骨架开始一个新研究项目
 
 1. 安装插件（见 [docs/publishing.md](../docs/publishing.md) 第 1 节）：至少 `science-core`，文献链路加 `science-literature`、`science-verify`。
-2. 在你的新项目空目录里启动 Claude Code / Kimi Code，运行 `cold-start-interview` 完成研究画像（只做一次）。
+2. 在你的新项目空目录里启动 Claude Code，运行 `cold-start-interview` 完成研究画像（只做一次）。
 3. 运行 `research-workspace init`（或对 Claude 说"初始化工作区"）：它会创建上述九个标准目录、初始化 `.openscience/provenance.jsonl`、生成 `WORKSPACE.md`——结果就与 `demo-workspace/` 同构。
 4. 对 `research-lifecycle` 说出你的研究主题，它会生成项目 slug（如 `3f9a1c7e`）并建立 `output/research-lifecycle/<slug>/`。
 5. 用 `literature-search` 检索：产物落在 `output/literature-search/<slug>/latest/papers.json`，格式同示例（示例中的记录为虚构，真实产物来自实际数据源）。

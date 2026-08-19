@@ -2,140 +2,128 @@
 
 # openscience
 
-**Open scientific research workbench — literature → hypothesis → experiment → analysis → writing, with verifiable evidence, auditable provenance, and human gates, delivered as Claude Code / Kimi Code plugins.**
+**An evidence-first research workflow for Claude Code.**
 
-[Quick start](#quick-start) · [How it works](#how-it-works) · [Plugins](#plugins) · [中文快速上手](#中文快速上手) · [Design provenance](THIRD_PARTY_NOTICES.md) · [Architecture](docs/architecture.md)
+Search literature, build traceable evidence, analyze data, write drafts, verify citations — and keep a human in control of every major research step.
 
-openscience is a local-first plugin marketplace for doing real research with an AI
-agent — without letting that agent grade its own homework. Literature search, reading,
-survey, and writing are wired into one evidence loop: every claim in a draft must trace
-to a retrieved `EvidenceItem`, every reference must survive automated verification, and
-every stage stops at a human gate before moving on.
+[Quick start](#quick-start) · [See it work](#see-it-work) · [Research packs](#research-packs) · [Architecture](docs/architecture.md) · [Examples](examples/)
 
-> [!IMPORTANT]
-> This repository is a research workflow tool. It does not produce scientific conclusions,
-> medical advice, or legal advice. All outputs are working drafts and must be reviewed by
-> the researcher before use or publication. Verification never proves a claim true — it
-> proves its citations and evidence trail are real and current.
+**Evidence, not memory** — factual claims are mapped back to literature or project data; unsupported claims are surfaced explicitly.
+**Verification built in** — citation metadata, identifier conflicts, and unsupported claims are checked by machine, not vibes.
+**Human-controlled workflow** — artifacts are saved to disk before each major stage is approved, revised, or rejected.
+
+> A failed search is a source gap, not a scientific conclusion.
+
+## Why openscience?
+
+A general coding agent can already search, code, and write. What it cannot do out of the box:
+
+| Problem | What openscience does |
+| --- | --- |
+| Research is not one chat — it's a stateful, multi-stage process | A lifecycle router with persisted stages (`question → literature → hypothesis → experiment → analysis → writing`) and resume-from-disk |
+| Claims in drafts drift away from sources | An explicit evidence chain: retrieval → `EvidenceItem` → whitelisted synthesis → draft → claim support check |
+| Agents run end-to-end without asking | Stage gates: each lifecycle stage writes its artifacts first, then pauses for `approve / revise / reject` |
+| Chinese research workflows are second-class everywhere | CNKI bibliography import, Wanfang API, GB/T 7714 citations, and an epidemiology/public-health pack |
+
+## See it work
+
+```text
+You:
+"调研 2023–2026 年 LLM agent 做蛋白 binder design 的进展，
+找出主要方法、失败模式和可验证的研究空白。"
+
+openscience:
+ 1. searches OpenAlex / Crossref / arXiv / Wanfang, dedupes into papers.json
+ 2. reads full text where available — everything else is honestly marked abstract-only
+ 3. maps claims ↔ evidence (EvidenceItem with verbatim quotes + page anchors)
+ 4. synthesizes an 8-field literature survey
+ 5. writes the draft (GB/T 7714 + references.bib)
+ 6. verifies every BibTeX entry via bibverify MCP
+ 7. flags unsupported claims and retrieves missing evidence
+ 8. stops — you approve, revise, or reject
+```
+
+Everything lands on disk:
+
+```text
+papers.json · evidence.json · survey.md · draft.md · references.bib
+citation report · .openscience/provenance.jsonl
+```
 
 ## Quick start
 
-Requirements: Python 3.11+, [uv](https://docs.astral.sh/uv/), and Claude Code or Kimi Code.
+Requirements: Python 3.11+, [uv](https://docs.astral.sh/uv/), and Claude Code.
 
-```bash
-# Add the marketplace and install the core plugins
+```text
 /plugin marketplace add Hylouis233/openscience
 /plugin install science-core@openscience
 /plugin install science-literature@openscience
 /plugin install science-verify@openscience
 ```
 
-Then, inside the agent:
+Then just ask in natural language:
 
 ```text
-1. cold-start-interview   # one-time interview → your research profile (playbook)
-2. research-workspace     # standard project layout (data/ figures/ papers/ output/ …)
-3. literature-search      # multi-source retrieval (OpenAlex / Crossref / arXiv / CNKI / Wanfang)
-4. literature-survey      # 8-field evidence mapping, EvidenceItem matrix
-5. review-writing         # draft with whitelisted citations, GB/T 7714 output
-6. citation-verify        # bibverify MCP checks every BibTeX entry against real sources
+帮我调研过去三年蛋白质 binder design 中 AI agent 的进展，
+重点比较自动化设计流程、实验验证和失败案例。
 ```
 
-Optional plugins: `science-compute` (SSH/HPC/long runs), `science-data` (domain
-database connectors), `science-epi` (epidemiology & public health).
+openscience routes the request through `literature-search → paper-read → literature-survey → review-writing → citation-verify` automatically. First run, it will ask you to complete a short `cold-start-interview` to build your research profile (field, data sources, compute, writing style).
 
-## How it works
+## What gets verified — and what doesn't
+
+**Checked:** whether references resolve (DOI/PMID/arXiv), whether returned metadata matches the entry, whether a factual claim has a supporting source, whether the environment and actions are logged.
+
+**Not claimed:** scientific truth. `no_match` means *not found in the queried sources* — never "fabricated". Verification does not prove a claim; it proves the citation trail is real, consistent, and reviewable.
+
+## Research packs
+
+| Pack | Install if you need… |
+| --- | --- |
+| **science-core** | The workbench: research profile, lifecycle routing, stage gates, provenance, reviewer |
+| **science-literature** | Search, read, survey, and write literature (incl. Chinese sources) |
+| **science-verify** | Citation verification (bibverify MCP), claim checks, evidence loop |
+| science-compute | Python/R analysis, SSH/HPC/Slurm, long-task runs |
+| science-data | Domain database connectors with a fail-closed license gate |
+| science-epi | Epidemiology & public health (outbreak curves, SEIR, spatial, writing) |
+
+**Recommended starting set:** `science-core` + `science-literature` + `science-verify`.
+
+## Full research lifecycle
 
 ```text
- research question
-   │
-   ▼
- literature-search ──► papers.json (unified PaperDocument, fail-structured)
-   │
-   ▼
- paper-read ──► EvidenceItem {paper_id, claim, quote, page, confidence}
-   │              (full-text or honestly marked abstract-only)
-   ▼
- literature-survey ──► 8-field synthesis, evidence whitelists only
-   │
-   ▼
- review-writing ──► draft + references.bib (GB/T 7714)
-   │
-   ▼
- citation-verify (bibverify MCP) ──► verified / identifier_conflict / no_match
-   │                                   (conflict ≠ not-found ≠ fabrication)
-   ▼
- claim-check ──► unsupported claims ──► evidence-loop ──► targeted re-retrieval
-   │
-   ▼
- reviewer agent (read-only) + stage-gate: approve / revise / reject
+question ─► [gate] ─► literature ─► [gate] ─► hypothesis ─► [gate]
+        ─► experiment ─► [gate] ─► analysis ─► [gate] ─► writing ─► reviewer
 ```
 
-Three contracts hold the loop together:
+When using the full lifecycle, each stage is persisted and paused for human approval before progression. `revise "feedback"` reruns the stage with your note injected — old artifacts are archived, never overwritten. Individual skills can also run standalone.
 
-- **```review fence** — every checking skill emits the same fenced-JSON verdicts
-  (`level / check / title / evidence / note`), consumed by one read-only reviewer agent.
-- **Stage gates** — each stage writes its artifacts to disk *before* asking for
-  `approve / revise / reject`; `revise` archives instead of overwriting, so the trail is
-  append-only.
-- **Provenance** — `record_run.py` appends every material action to
-  `.openscience/provenance.jsonl` with an environment fingerprint (deduplicated by hash).
+## Chinese research support
 
-## Plugins
+- **CNKI**: no scraping, no captcha bypass — you export a bibliography from cnki.net, `cn-literature` parses it into the shared paper schema
+- **Wanfang**: official open-platform API (`WANFANG_TOKEN`; degrades cleanly when unset)
+- **GB/T 7714-2015** reference formatting alongside BibTeX
+- **science-epi**: outbreak investigation, SEIR modeling, spatial epi, and Chinese public-health writing templates
 
-| Plugin | What it carries | Status |
-| --- | --- | --- |
-| science-core | Research profile (playbook), lifecycle router, stage-gate, provenance, evidence capsule, reviewer | ✅ |
-| science-literature | literature-search / paper-read / literature-survey / review-writing / cn-literature (CNKI export parser + Wanfang API) | ✅ |
-| science-verify | citation-verify (bibverify MCP), claim-check, evidence-loop | ✅ |
-| science-compute | python/r-analysis, remote-compute (probe-then-contract), hpc-slurm, run-monitor (long-task Run abstraction) | ✅ |
-| science-data | Connector registry with fail-closed license gate, domain retrieval playbooks | ✅ |
-| science-epi | Outbreak analysis (linelist → epi curve / attack rates), SEIR modeling, spatial epi, epi writing | ✅ |
+## Design principles
 
-All connectors are optional and degrade honestly: a missing token or an unreachable
-source produces a structured "source gap" note, never a silent omission.
+- **Missing data stays missing.** No full text → `abstract-only`. No database access → source gap. No citation match → `no_match`, not "fabricated".
+- **Never turn tool failure into evidence.** Every external call degrades to a structured state, visible in the output.
+- **Humans decide at gates.** The agent prepares; you approve.
+- **Append-only provenance.** `record_run.py` logs actions and environment fingerprints to `.openscience/provenance.jsonl`.
 
-## Repository map
+## Examples
 
-```text
-plugins/
-  science-core/         workbench skeleton (CLAUDE.md profile + guardrails, 8 skills, 2 agents)
-  science-literature/   retrieval → reading → survey → writing (+ search/extract scripts)
-  science-verify/       evidence engine (bibverify MCP + 3 skills)
-  science-compute/      kernels, SSH/HPC, long-task runs (+ 2 stdlib scripts)
-  science-data/         connector fleet registry (connectors.yaml, fail-closed gate)
-  science-epi/          epidemiology domain pack (+ epi_curve.py, seir.py)
-evals/                  trigger-cases.json + automated runner (offline & LLM modes)
-examples/               demo-workspace + demo-epi (fully worked, synthetic data)
-docs/                   architecture.md, publishing.md, assets/
-scripts/validate-skills.py   contract checker (stdlib, mirrors CI)
-.github/workflows/      validate + weekly trigger evals (optional LLM secrets)
-```
+- [`examples/demo-workspace`](examples/demo-workspace/) — standard research workspace layout with sample artifacts
+- [`examples/demo-epi`](examples/demo-epi/) — a fully worked outbreak analysis (synthetic data): linelist → epi curve → SEIR → report
 
-## 中文快速上手
+## Architecture
 
-安装后按顺序使用即可：先跑 `cold-start-interview` 生成研究画像，再用
-`literature-search` 检索中英文文献（说一句"帮我查一下 XX 方向近三年的进展"即可触发），
-综述与写作走 `literature-survey` → `review-writing`，投稿前必须过
-`citation-verify` 核验参考文献——查不到不等于伪造，标识符冲突会单独列出。
-每个阶段结束会停下来等你 `approve / revise / reject`，`revise "意见"` 会带着意见重跑当前阶段且不覆盖旧稿。
-流行病学方向直接装 `science-epi`：暴发调查、SEIR、空间分析、公卫写作开箱即用。
+Design contracts (review fence, stage gates, slug contract, evidence capsule levels) are documented in [docs/architecture.md](docs/architecture.md). Release and contribution workflow: [docs/publishing.md](docs/publishing.md).
 
 ## Design provenance
 
-Clean-room implementation informed by published designs — see
-[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for the full registry
-(ai4s-research/open-science, lamm-mit/scienceclaw, xuzhougeng/wisp-science,
-anthropics/life-sciences, YUANXICHE98/LabOS, Tswoen/Paper-Agent, and
-[Hylouis233/bibverify](https://github.com/Hylouis233/bibverify) as the verification MCP).
-AGPL and unlicensed sources informed ideas only; every line here is original.
-
-## Contributing
-
-Start with [docs/publishing.md](docs/publishing.md). PRs must keep
-`python scripts/validate-skills.py` green, ship original text only (no AGPL code
-lifting), and preserve the fail-structured / honest-degradation semantics. Trigger evals
-live in `evals/` — add cases with any new skill.
+openscience is an independent implementation informed by several open-source research-agent projects. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for design references and license attribution — including [Hylouis233/bibverify](https://github.com/Hylouis233/bibverify), the citation-verification MCP.
 
 ## License
 

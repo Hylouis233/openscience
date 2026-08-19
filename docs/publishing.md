@@ -1,6 +1,6 @@
 # 发布指南：openscience marketplace
 
-本文面向维护者与贡献者，说明本仓库作为 Claude Code / Kimi Code 插件 marketplace 的发布、版本管理与贡献流程。使用者安装说明见 [README.md](../README.md) 与下文第 1 节。
+本文面向维护者与贡献者，说明本仓库作为 Claude Code 插件 marketplace 的发布、版本管理与贡献流程。使用者安装说明见 [README.md](../README.md) 与下文第 1 节。
 
 ## 1. 用户如何安装
 
@@ -26,7 +26,7 @@
 
 - `science-core` 是骨架插件，其余插件依赖它定义的契约（provenance、证据胶囊、review 围栏、产物路径），应建议用户**先装 science-core**。
 - marketplace 名 `openscience` 来自 `.claude-plugin/marketplace.json` 的 `name` 字段，改名会破坏既有用户的 `@openscience` 引用，视为破坏性变更。
-- Kimi Code 支持同一套目录规范（`.claude-plugin/plugin.json`、`skills/*/SKILL.md`、`.mcp.json`），同一仓库无需额外适配。
+- Kimi Code 使用独立的插件规范（`kimi.plugin.json`、`/plugins` 命令），本仓库暂不适配；适配层见后续计划。
 
 ## 2. 版本管理
 

@@ -31,7 +31,7 @@
 
 **手动评测（推荐，最贴近真实使用）：**
 
-1. 在 Claude Code / Kimi Code 中安装本仓库插件。
+1. 在 Claude Code 中安装本仓库插件。
 2. 每条用例开一个**全新会话**（避免上下文污染），原样粘贴 `utterance`。
 3. 观察实际加载（被选中触发）的 skill，与 `expected_skill` 比对并记录：
    - 正例：实际触发的 top-1 skill == `expected_skill` 记为命中。
